@@ -1,0 +1,349 @@
+/* ===== Базовые стили и переменные ===== */
+:root {
+  --primary-color: #d44f68;
+  --secondary-color: #ffb9b9;
+  --accent-color: #76172a;
+  --text-color: #333;
+  --text-light: #fff;
+  --border-color: #4285f4;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --border-radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* ===== Основная структура ===== */
+main {
+  padding: 2rem;
+}
+
+.form__class {
+  background-color: var(--text-light);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.main__block {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.right__block, 
+.left__block {
+  flex: 1;
+  min-width: 300px;
+}
+
+
+input, 
+textarea, 
+.select__time {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  margin-bottom: 1.5rem; 
+  transition: var(--transition);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+.double__input {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; 
+  margin-bottom: 1.5rem; 
+}
+
+.special__input {
+  margin-bottom: 20px;
+}
+
+
+input:hover,
+textarea:hover,
+.select__time:hover {
+  background-color: var(--secondary-color);
+}
+
+input:focus,
+textarea:focus,
+.select__time:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: var(--text-light);
+  box-shadow: 0 0 0 2px rgba(212, 79, 104, 0.2);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.product-box {
+  position: relative;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem !important; 
+  background: var(--text-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.product-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.remove-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #c00;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.remove-button:hover {
+  color: #900;
+  transform: scale(1.2);
+}
+
+/* ===== Управление количеством ===== */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.quantity-controls button {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  background: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.quantity-controls button:hover {
+  background: var(--accent-color);
+}
+
+.strange__btn {
+  width: 4rem;
+  text-align: center;
+  border: 1px solid var(--secondary-color);
+}
+
+/* ===== Кнопки ===== */
+.button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background-color: #f5d742;
+  color: var(--text-color);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 2rem 0;
+}
+
+.button:hover {
+  background-color: #e8c926;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+/* ===== Платежные системы ===== */
+.payment-icons {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.payment-icons p {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.payment-icons img {
+  height: 30px;
+  margin: 0 0.5rem;
+  transition: var(--transition);
+}
+
+.payment-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Рекомендуемые товары ===== */
+.recommendation-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.recommendation-item {
+  background: var(--text-light);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  text-align: center;
+}
+
+.recommendation-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.recommendation-item img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.recommendation-btn {
+  background: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.recommendation-btn:hover {
+  background: var(--accent-color);
+}
+
+/* ===== Адаптация ===== */
+@media (max-width: 1024px) {
+  .main__block {
+    flex-direction: column;
+  }
+  
+  .product-box {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .product-image {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+@media (max-width: 900px) {
+  .main__block {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .left__block {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .product-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+  }
+
+  .product-image {
+    max-width: 200px;
+    margin-bottom: 15px;
+  }
+
+  .double__input {
+    flex-direction: column;
+  }
+
+  .double__input input {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .recommendation-box {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+  
+  .form__class {
+    padding: 1rem;
+  }
+  
+  .double__input {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .recommendation-box {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .payment-icons img {
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-box {
+    padding: 1rem;
+  }
+  
+  .product-image {
+    height: 120px;
+  }
+  
+  .recommendation-box {
+    grid-template-columns: 1fr 1fr;
+  }
+}

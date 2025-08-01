@@ -1,0 +1,320 @@
+/* ===== Базовые стили ===== */
+:root {
+  --primary-color: #d44f68;
+  --secondary-color: #ffb9b9;
+  --text-color: #333;
+  --text-light: white;
+  --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+/* ===== Шапка ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  padding: 15px 5%;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo__img {
+  height: 80px;
+  width: auto;
+  transition: var(--transition);
+  border-radius: 8px;
+}
+
+.logo a:hover img {
+  transform: scale(1.05);
+}
+
+/* ===== Навигация ===== */
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header__list {
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header__link a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: var(--transition);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.header__link a:hover {
+  color: var(--primary-color);
+  background-color: var(--text-light);
+}
+
+/* ===== Элементы управления ===== */
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.styled-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--secondary-color);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.styled-select:hover {
+  transform: scale(1.05);
+}
+
+.cart-icon {
+  position: relative;
+  transition: var(--transition);
+}
+
+.cart-icon:hover {
+  transform: scale(1.1);
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+/* ===== Сетка товаров ===== */
+.products {
+  padding: 40px 15%;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.product-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 250px;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.price__span {
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.main__btn {
+  background: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+.main__btn:hover {
+  background: #76172a;
+  transform: scale(1.05);
+}
+
+/* ===== Подвал ===== */
+footer {
+  background: var(--primary-color);
+  color: var(--text-light);
+  padding: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ===== Бургер-меню ===== */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.burger-menu span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* Активное состояние бургера */
+.burger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.burger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+.burger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===== Адаптация ===== */
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+  .products {
+  padding: 40px 5%;
+}
+  
+  .header__list {
+    gap: 20px;
+  }
+}
+@media (max-width: 900px) {
+
+  .products {
+  padding: 40px 5%;
+}
+
+  
+  .header__list {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 10px 5%;
+  }
+    .products {
+  padding: 40px 5%;
+}
+  
+  .burger-menu {
+    display: flex;
+  }
+  
+  .nav-container {
+    width: 100%;
+    order: 3;
+    margin-top: 15px;
+  }
+  
+  .header__list {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: 20px 0;
+    gap: 15px;
+  }
+  
+  .header__list.active {
+    display: flex;
+  }
+  
+  .logo {
+    gap: 15px;
+  }
+  
+  .logo__img {
+    height: 60px;
+  }
+  
+  .product-card img {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    gap: 10px;
+  }
+    .products {
+  padding: 40px 5%;
+}
+  
+  .logo__img {
+    height: 50px;
+  }
+  
+  .top-controls {
+    gap: 10px;
+  }
+  
+  .product-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .product-card {
+    padding: 10px;
+  }
+  
+  .product-card img {
+    height: 120px;
+  }
+  
+  .main__btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
