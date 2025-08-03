@@ -4,7 +4,7 @@ require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $product_id = (int)$_POST['id'];
-    $quantity = max(1, (int)($_POST['quantity'] ?? 1)); // минимум 1
+    $quantity = max(1, (int)($_POST['quantity'] ?? 1));
 
     $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
     $stmt->execute([$product_id]);
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         die('Товар не найден');
     }
 
-    // Добавляем в корзину
+
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         ];
     }
 
-    // Возвращаем пользователя обратно
+    
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
 }

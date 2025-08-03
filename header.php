@@ -17,7 +17,7 @@ $symbols = [
     'USD' => '$',
     'RUB' => '₽',
     'TRY' => '₺',
-    'MYR' => 'RM',
+    'MYR' => '',
 
 ];
 
@@ -53,12 +53,13 @@ if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
     <a href="main.php">
       <img class="logo__img" src="./img/logo2.png" alt="Логотип">
     </a> 
-    <a href="main.php" title="На главную">
+    <a class="logo__block" href="main.php" title="На главную">
       <img src="./img/home.png" alt="Домой" style="width: 24px; height: 24px;">
+      <span class="logo__span">На главную</span>
     </a>
   </div>
 
-  <!-- Валюта и корзина — вынесены отдельно -->
+
   <div class="top-controls">
     <form method="post" action="">
       <select name="currency" id="currency" class="styled-select" onchange="this.form.submit()">
@@ -89,14 +90,14 @@ if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
     </a>
   </div>
 
-  <!-- Бургер -->
+
   <div id="burger" class="burger-menu">
     <span></span>
     <span></span>
     <span></span>
   </div>
 
-  <!-- Навигация -->
+
   <nav>
     <ul id="navLinks" class="header__list">
       <li class="header__link"><a href="./flowers.php">Цветы</a></li>

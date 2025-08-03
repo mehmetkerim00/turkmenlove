@@ -118,7 +118,7 @@
     transform: scale(1.1);
 }
 
-/* ---------- Адаптация футера для планшетов и мобильных ---------- */
+
 @media (max-width: 1024px) {
   .footer-container {
     flex-direction: column;

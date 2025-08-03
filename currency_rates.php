@@ -3,12 +3,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$currencies = ['USD', 'RUB', 'TRY', 'MYR', 'BYN', 'EUR', 'GBP'];
+$currencies = ['USD', 'RUB', 'TRY', 'MYR'];
 
 if (
     !isset($_SESSION['exchange_rates']) || 
     !isset($_SESSION['rates_time']) || 
-    (time() - $_SESSION['rates_time'] > 43200) // обновление каждые 12 часов
+    (time() - $_SESSION['rates_time'] > 43200) 
 ) {
     $api_key = "c99cc16bfc514c9e959ea706f2cfae3b";
     $symbols = implode(',', $currencies);
@@ -31,15 +31,13 @@ if (
         $_SESSION['exchange_rates'] = $rates;
         $_SESSION['rates_time'] = time();
     } else {
-        // Если что-то не пришло от API — резервный курс
+    
         $_SESSION['exchange_rates'] = [
             'USD' => 1,
             'RUB' => 90,
             'TRY' => 32,
             'MYR' => 4.7,
-            'BYN' => 3.2,
-            'EUR' => 0.9,
-            'GBP' => 0.78
+          
         ];
         $_SESSION['rates_time'] = time();
     }

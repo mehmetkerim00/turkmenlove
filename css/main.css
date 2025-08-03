@@ -1,4 +1,4 @@
-/* ===== Базовые стили ===== */
+
 :root {
   --primary-color: #d44f68;
   --secondary-color: #ffb9b9;
@@ -16,7 +16,6 @@ body {
   color: var(--text-color);
 }
 
-/* ===== Шапка ===== */
 .header {
   display: flex;
   justify-content: space-between;
@@ -43,7 +42,7 @@ body {
   transform: scale(1.05);
 }
 
-/* ===== Навигация ===== */
+
 .nav-container {
   display: flex;
   align-items: center;
@@ -73,7 +72,6 @@ body {
   background-color: var(--text-light);
 }
 
-/* ===== Элементы управления ===== */
 .top-controls {
   display: flex;
   align-items: center;
@@ -118,7 +116,7 @@ body {
   font-size: 0.7rem;
 }
 
-/* ===== Сетка товаров ===== */
+
 .products {
   padding: 40px 15%;
 }
@@ -144,6 +142,10 @@ body {
 .product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.logo__span {
+  display: none;
 }
 
 .product-card img {
@@ -176,7 +178,6 @@ body {
   transform: scale(1.05);
 }
 
-/* ===== Подвал ===== */
 footer {
   background: var(--primary-color);
   color: var(--text-light);
@@ -185,7 +186,6 @@ footer {
   margin-top: 40px;
 }
 
-/* ===== Бургер-меню ===== */
 .burger-menu {
   display: none;
   flex-direction: column;
@@ -203,7 +203,7 @@ footer {
   transition: var(--transition);
 }
 
-/* Активное состояние бургера */
+
 .burger-menu.active span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
@@ -214,7 +214,6 @@ footer {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* ===== Адаптация ===== */
 @media (max-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -287,13 +286,35 @@ footer {
 @media (max-width: 480px) {
   .logo {
     gap: 10px;
+  
   }
+
+  .header {
+    padding: 20px;
+  }
+
+
+  .logo__span {
+    display: block;
+   color: black;
+   font-size: 12px;
+  }
+
+  .logo__block {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+     text-decoration: none;
+  }
+
+  
     .products {
   padding: 40px 5%;
 }
   
   .logo__img {
-    height: 50px;
+  display: none;
   }
   
   .top-controls {

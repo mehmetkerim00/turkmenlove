@@ -40,7 +40,7 @@
     margin-top: 10px;
     font-size: 14px;
   }
-  /* Медиазапросы для адаптации */
+
 @media (max-width: 768px) {
   .payment-container {
     margin: 30px 20px;

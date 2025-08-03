@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     foreach ($_SESSION['cart'] as $index => $item) {
         if ($item['id'] == $id) {
             unset($_SESSION['cart'][$index]);
-            $_SESSION['cart'] = array_values($_SESSION['cart']); // сброс индексов
+            $_SESSION['cart'] = array_values($_SESSION['cart']); 
             break;
         }
     }

@@ -9,7 +9,7 @@ if (!isset($_SESSION['cart'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productId = (int)$_POST['product_id'];
 
-    // Получаем данные товара из базы
+   
     $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
     $stmt->execute([$productId]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);

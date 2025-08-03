@@ -1,4 +1,4 @@
-/* ===== Базовые стили и переменные ===== */
+
 :root {
   --primary-color: #d44f68;
   --secondary-color: #ffb9b9;
@@ -24,7 +24,7 @@ body {
   line-height: 1.6;
 }
 
-/* ===== Основная структура ===== */
+
 main {
   padding: 2rem;
 }
@@ -56,7 +56,7 @@ textarea,
 .select__time {
   width: 100%;
   padding: 0.8rem 1rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--primary-color);
   border-radius: var(--border-radius);
   font-size: 1rem;
   margin-bottom: 1.5rem; 
@@ -139,7 +139,7 @@ textarea {
   transform: scale(1.2);
 }
 
-/* ===== Управление количеством ===== */
+
 .quantity-controls {
   display: flex;
   align-items: center;
@@ -169,7 +169,7 @@ textarea {
   border: 1px solid var(--secondary-color);
 }
 
-/* ===== Кнопки ===== */
+
 .button {
   display: block;
   width: 100%;
@@ -191,7 +191,7 @@ textarea {
   box-shadow: var(--shadow);
 }
 
-/* ===== Платежные системы ===== */
+
 .payment-icons {
   margin-top: 2rem;
   text-align: center;
@@ -212,7 +212,7 @@ textarea {
   transform: scale(1.1);
 }
 
-/* ===== Рекомендуемые товары ===== */
+
 .recommendation-box {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -258,7 +258,21 @@ textarea {
   background: var(--accent-color);
 }
 
-/* ===== Адаптация ===== */
+input:invalid, 
+select:invalid,
+input.error {
+  border-color: #ff4444 !important;
+  box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.2);
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.8rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+
 @media (max-width: 1024px) {
   .main__block {
     flex-direction: column;
@@ -345,5 +359,13 @@ textarea {
   
   .recommendation-box {
     grid-template-columns: 1fr 1fr;
+  }
+  .flatpickr-calendar {
+    max-width: 100vw !important;
+    width: 100% !important;
+  }
+
+  input {
+    margin-bottom: 15px !important;
   }
 }

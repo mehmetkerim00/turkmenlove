@@ -158,65 +158,127 @@ if (!isset($rates[$currency])) {
 <main>
   <form class="form__class" method="post" action="./orderdata.php">
     <div class="main__block">
-      <div class="right__block">
-        <h1>Оформление заказа</h1>
-        <label>
-          <h3 style="margin: 10px;">Ваши контакты</h3>
-          <input class="special__input" type="name" name="client_name" placeholder="Имя" required>
-        </label><br>
+    <div class="right__block">
+  <h1>Оформление заказа</h1>
+ 
+  <div class="form-group">
+    <h3 style="margin: 10px;">Ваши контакты</h3>
+    <input class="special__input" type="text" name="client_name" 
+           placeholder="Имя" 
+           pattern="[А-Яа-яЁёA-Za-z\s]{2,50}"
+           title="Имя должно содержать только буквы (2-50 символов)"
+           required>
+  </div>
 
-        <div class="double__input">
-          <input type="email" placeholder="E-mail" name="client_email" required>
-          <input id="phone1" name="client_phone" class="tel" type="tel" required />
-        </div>
+  <div class="double__input">
+    <input type="email" name="client_email" 
+           placeholder="E-mail"
+           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+           title="Введите корректный email (например, example@mail.com)"
+           required>
+    
+    <input id="phone1" name="client_phone" class="tel" type="tel"
+           placeholder="Телефон"
+           required
+           data-intl-tel-input-id="0">
+  </div>
 
-        <h3 style="margin: 10px;">Контакты получателя</h3>
-        <div class="double__input">
-          <input type="name" placeholder="Имя" name="reciever_name" required>
-          <input id="phone2" class="tel" name="reciever_phone" type="tel" required />
-        </div><br><br>
+ 
+  <div class="form-group">
+    <h3 style="margin: 10px;">Контакты получателя</h3>
+    <input type="text" name="reciever_name" 
+           placeholder="Имя"
+           pattern="[А-Яа-яЁёA-Za-z\s]{2,50}"
+           title="Имя должно содержать только буквы (2-50 символов)"
+           required>
+  </div>
 
-        <h3 style="margin: 10px;">Город</h3>
-        <select class="select__time" required name="city">
-          <option value="Ашхабад">Ашхабад</option>
-          <option value="Туркменабат">Туркменабат</option>
-        </select><br>
+  <div class="double__input">
+    <input id="phone2" class="tel" name="reciever_phone" type="tel"
+           placeholder="Телефон получателя"
+           required
+           data-intl-tel-input-id="1">
+  </div>
 
-        <label style="display: flex; align-items: center; max-width: 200px">
-              <span style="margin-left: 4px;">Не знаю адрес</span>
-          <input name="no_address" type="checkbox" id="no-address">
-      
-        </label><br>
 
-        <p id="no-address-msg" style="display: none; color: green; font-size: 20px">
-          Свяжемся с получателем и узнаем адрес
-        </p>
+  <div class="form-group">
+    <h3 style="margin: 10px;">Город</h3>
+    <select class="select__time" name="city" required>
+      <option value="" disabled selected>-- Выберите город --</option>
+      <option value="Ашхабад">Ашхабад</option>
+      <option value="Туркменабат">Туркменабат</option>
+    </select>
+  </div>
 
-        <div id="address-fields">
-          <input name="address" type="text" class="special__input" placeholder="Улица и номер дома" required>
-          <input name="apartment" type="number"  class="special__input" placeholder="Квартира" required>
-          <input name="gate" type="number" class="special__input" placeholder="Подъезд" required>
-          <input name="floor" type="number" class="special__input" placeholder="Этаж" required>
-        </div>
 
-        <textarea name="textarea" placeholder="Комментарии (например, доп. контакт)"></textarea><br>
+  <div class="form-group">
+    <label style="display: flex; align-items: center; max-width: 200px; margin-bottom: 15px;">
+    <span style="margin-left: 4px;">Не знаю адрес</span>
+      <input name="no_address" type="checkbox" id="no-address">
+   
+    </label>
+    <p id="no-address-msg" style="display: none; color: green; font-size: 20px">
+      Свяжемся с получателем и узнаем адрес
+    </p>
+  </div>
 
-        <h3 style="margin: 10px;">Когда доставить</h3>
-        <input type="text" id="date" name="delivery_date" class="special__input" placeholder="Выберите дату">
+  <div id="address-fields">
+    <input name="address" type="text" class="special__input" 
+           placeholder="Улица и номер дома"
+           pattern="[\w\s.,-]{5,100}"
+           title="Адрес должен содержать 5-100 символов"
+           required>
+    
+    <input name="apartment" type="number" class="special__input" 
+           placeholder="Квартира"
+           min="1" max="999"
+           title="Номер квартиры (1-999)"
+           required>
+    
+    <input name="gate" type="number" class="special__input" 
+           placeholder="Подъезд"
+           min="1" max="50"
+           title="Номер подъезда (1-50)"
+           required>
+    
+    <input name="floor" type="number" class="special__input" 
+           placeholder="Этаж"
+           min="1" max="150"
+           title="Номер этажа (1-150)"
+           required>
+  </div>
 
-        <h3 style="margin: 10px;">Укажите время доставки</h3>
-        <select class="select__time" name="delivery_time" required>
-          <option value="">-- Выберите интервал --</option>
-          <?php
-          $times = ["10:00–12:00", "11:00–13:00", "12:00–14:00", "13:00–15:00", "14:00–16:00", "15:00–17:00", "16:00–18:00", "17:00–19:00", "18:00–20:00", "19:00–21:00", "20:00–22:00", "21:00–23:00", "22:00–00:00"];
-          foreach ($times as $time) {
-              echo "<option value=\"$time\">$time</option>";
-          }
-          ?>
-        </select>
 
-       
-      </div>
+  <div class="form-group">
+    <textarea name="textarea" placeholder="Комментарии (например, доп. контакт)"
+              maxlength="500"></textarea>
+  </div>
+
+  
+  <div class="form-group">
+    <h3 style="margin: 10px;">Когда доставить</h3>
+    <input type="text" id="date" name="delivery_date" class="special__input" 
+           placeholder="Выберите дату"
+           required
+           readonly>
+  </div>
+
+  <div class="form-group">
+    <h3 style="margin: 10px;">Укажите время доставки</h3>
+    <select class="select__time" name="delivery_time" required>
+      <option value="" disabled selected>-- Выберите интервал --</option>
+      <?php
+      $times = ["10:00–12:00", "11:00–13:00", "12:00–14:00", "13:00–15:00", 
+               "14:00–16:00", "15:00–17:00", "16:00–18:00", "17:00–19:00", 
+               "18:00–20:00", "19:00–21:00", "20:00–22:00", "21:00–23:00", 
+               "22:00–00:00"];
+      foreach ($times as $time) {
+          echo "<option value=\"$time\">$time</option>";
+      }
+      ?>
+    </select>
+  </div>
+</div>
 
       <div class="left__block">
   <div class="left-column">
@@ -264,7 +326,7 @@ $symbol = $symbols[$currency] ?? '$';
 $recommendedQuery = $conn->query("SELECT * FROM products WHERE category IN ('giftcard', 'toy') LIMIT 8");
 
 while ($gift = $recommendedQuery->fetch(PDO::FETCH_ASSOC)) {
-    $convertedPrice = round($gift['price'] * $rates[$currency], 2);
+$convertedPrice = ceil(($gift['price'] * $rates[$currency]) / 10) * 10;
     echo '
     <div class="recommendation-item">
         <img src="./img/' . htmlspecialchars($gift['image']) . '" alt="' . htmlspecialchars($gift['name']) . '">
@@ -339,18 +401,33 @@ while ($gift = $recommendedQuery->fetch(PDO::FETCH_ASSOC)) {
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
 <script>
-  flatpickr("#date", {
-    locale: "ru",
-    dateFormat: "d F Y",
-    defaultDate: "today",
-    minDate: "today"
-  });
+ flatpickr("#date", {
+  locale: "ru",
+  dateFormat: "d F Y",
+  defaultDate: "today",
+  minDate: "today",
+  disableMobile: false, 
+  clickOpens: true,   
+  allowInput: false   
+});
 
   document.getElementById('no-address').addEventListener('change', function () {
     const checked = this.checked;
     document.getElementById('address-fields').style.display = checked ? 'none' : 'block';
     document.getElementById('no-address-msg').style.display = checked ? 'block' : 'none';
   });
+  document.getElementById('no-address').addEventListener('change', function() {
+    const addressFields = document.getElementById('address-fields');
+    const inputs = addressFields.querySelectorAll('input[required]');
+    
+    if (this.checked) {
+        
+        inputs.forEach(input => input.removeAttribute('required'));
+    } else {
+    
+        inputs.forEach(input => input.setAttribute('required', ''));
+    }
+});
 </script>
 
 <script>
@@ -380,6 +457,69 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <?php include 'footer.php'; ?>
 <script src="./index.js"></script>
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+  const form = this;
+  let isValid = true;
+
+document.getElementById('no-address').addEventListener('change', function() {
+    const addressFields = document.getElementById('address-fields');
+    const inputs = addressFields.querySelectorAll('input[required]');
+    
+    if (this.checked) {
+        
+        inputs.forEach(input => input.removeAttribute('required'));
+    } else {
+    
+        inputs.forEach(input => input.setAttribute('required', ''));
+    }
+});
+  const phoneInputs = [
+    document.querySelector('#phone1'),
+    document.querySelector('#phone2')
+  ];
+
+  phoneInputs.forEach(input => {
+    const iti = window.intlTelInputGlobals.getInstance(input);
+    if (!iti.isValidNumber()) {
+      input.style.borderColor = 'red';
+      isValid = false;
+    }
+  });
+
+
+  const dateInput = document.getElementById('date');
+  if (!dateInput.value) {
+    dateInput.style.borderColor = 'red';
+    isValid = false;
+  }
+
+  const noAddress = document.getElementById('no-address');
+  const addressFields = document.getElementById('address-fields');
+
+  if (!noAddress.checked) {
+    const addressInputs = addressFields.querySelectorAll('input[required]');
+    addressInputs.forEach(input => {
+      if (!input.value.trim()) {
+        input.style.borderColor = 'red';
+        isValid = false;
+      }
+    });
+  }
+
+  if (!isValid) {
+    e.preventDefault();
+    alert('Пожалуйста, заполните все обязательные поля корректно!');
+  }
+});
+
+
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('input', () => {
+    el.style.borderColor = '';
+  });
+});
+</script>
 
 </body>
 </html> 
