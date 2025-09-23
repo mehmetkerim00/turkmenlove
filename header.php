@@ -10,7 +10,6 @@ $rates = $_SESSION['exchange_rates'] ?? [
     'RUB' => 90,
     'TRY' => 32,
     'MYR' => 4.7,
-
 ];
 
 $symbols = [
@@ -18,7 +17,6 @@ $symbols = [
     'RUB' => '₽',
     'TRY' => '₺',
     'MYR' => '',
-
 ];
 
 if (isset($_POST['currency']) && array_key_exists($_POST['currency'], $rates)) {
@@ -49,70 +47,66 @@ if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
 <body>
 
 <header class="header">
-  <div class="logo">
-    <a href="main.php">
-      <img class="logo__img" src="./img/logo2.png" alt="Логотип">
-    </a> 
-    <a class="logo__block" href="main.php" title="На главную">
-      <img src="./img/home.png" alt="Домой" style="width: 24px; height: 24px;">
-      <span class="logo__span">На главную</span>
-    </a>
-  </div>
+    <div class="logo">
+        <a href="main.php">
+            <img class="logo__img" src="./img/logo2.png" alt="Логотип" loading="lazy">
+        </a> 
+        <a class="logo__block" href="main.php" title="На главную">
+            <img src="./img/home.png" alt="Домой" style="width: 24px; height: 24px;">
+            <span class="logo__span">На главную</span>
+        </a>
+    </div>
 
+    <div class="top-controls">
+        <form method="post" action="">
+            <select name="currency" id="currency" class="styled-select" onchange="this.form.submit()">
+                <option value="USD" <?= $currency == 'USD' ? 'selected' : '' ?>>🇺🇸 USD $</option>
+                <option value="RUB" <?= $currency == 'RUB' ? 'selected' : '' ?>>🇷🇺 RUB ₽</option>
+                <option value="TRY" <?= $currency == 'TRY' ? 'selected' : '' ?>>🇹🇷 TRY ₺</option>
+                <option value="MYR" <?= $currency == 'MYR' ? 'selected' : '' ?>>🇲🇾 MYR RM</option>
+            </select>
+        </form>
 
-  <div class="top-controls">
-    <form method="post" action="">
-      <select name="currency" id="currency" class="styled-select" onchange="this.form.submit()">
-        <option value="USD" <?= $currency == 'USD' ? 'selected' : '' ?>>🇺🇸 USD $</option>
-        <option value="RUB" <?= $currency == 'RUB' ? 'selected' : '' ?>>🇷🇺 RUB ₽</option>
-        <option value="TRY" <?= $currency == 'TRY' ? 'selected' : '' ?>>🇹🇷 TRY ₺</option>
-        <option value="MYR" <?= $currency == 'MYR' ? 'selected' : '' ?>>🇲🇾 MYR RM</option>
- 
-      </select>
-    </form>
+        <a href="checkout.php" class="cart-icon">
+            <img src="img/cart.png" alt="Cart" style="width: 24px;" loading="lazy">
+            <?php if ($cartCount > 0): ?>
+                <span class="cart-count"><?= $cartCount ?></span>
+            <?php endif; ?>
+        </a>
+    </div>
 
-    <a href="checkout.php" class="cart-icon" style="position: relative; display: inline-block;">
-      <img src="img/cart.png" alt="Cart" style="width: 24px;">
-      <?php if ($cartCount > 0): ?>
-        <span style="
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: red;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 12px;
-        ">
-          <?= $cartCount ?>
-        </span>
-      <?php endif; ?>
-    </a>
-  </div>
+    <div id="burger" class="burger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-
-  <div id="burger" class="burger-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-
-  <nav>
-    <ul id="navLinks" class="header__list">
-      <li class="header__link"><a href="./flowers.php">Цветы</a></li>
-      <li class="header__link"><a href="./cakes.php">Торты</a></li>
-      <li class="header__link"><a href="./toys.php">Игрушки</a></li>
-      <li class="header__link"><a href="./gift_card.php">Подарочные карты</a></li>
-    </ul>
-  </nav>
+    <nav class="nav-container">
+        <ul id="navLinks" class="header__list">
+            <li class="header__link"><a href="./flowers.php">Цветы</a></li>
+            <li class="header__link"><a href="./cakes.php">Торты</a></li>
+            <li class="header__link"><a href="./toys.php">Игрушки</a></li>
+            <li class="header__link"><a href="./gift_card.php">Подарочные карты</a></li>
+        </ul>
+    </nav>
 </header>
 
 <script>
-  const burger = document.getElementById('burger');
-  const nav = document.getElementById('navLinks');
+document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('navLinks');
 
-  burger.addEventListener('click', () => {
-    nav.classList.toggle('active');
-  });
+    burger.addEventListener('click', () => {
+        burger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+   
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            burger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+});
 </script>

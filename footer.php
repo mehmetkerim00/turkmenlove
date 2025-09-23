@@ -33,7 +33,7 @@
     <div class="footer-social">
       <h4>Мы в соцсетях</h4>
       <a href="#"><img src="img/instagram.png" alt="Instagram" width="24"></a>
-      <a href="#"><img src="img/facebook.png" alt="Facebook" width="24"></a>
+      <a href="./admin_login.php"><img src="img/facebook.png" alt="Facebook" width="24"></a>
       <a href="#"><img src="img/telegram.png" alt="Telegram" width="24"></a>
       <a href="#"><img src="img/whatsapp.png" alt="WhatsApp" width="24"></a>
     </div>
