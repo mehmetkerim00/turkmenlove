@@ -1,12 +1,11 @@
 :root {
-  --primary-color: #d44f68;
-  --secondary-color: #ffb9b9;
+  --primary-color: #0d6b28;
+  --secondary-color: #daffb9;
   --text-color: #333;
   --text-light: white;
   --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
 }
-
 
 * {
   box-sizing: border-box;
@@ -45,7 +44,6 @@ body {
 .logo a:hover img {
   transform: scale(1.05);
 }
-
 
 .nav-container {
   display: flex;
@@ -86,7 +84,7 @@ body {
   padding: 8px 12px;
   border-radius: 6px;
   border: none;
-  background-color: var(--secondary-color);
+  background-color: #daffb9;
   cursor: pointer;
   transition: var(--transition);
   font-size: 0.9rem;
@@ -120,15 +118,35 @@ body {
   font-size: 0.7rem;
 }
 
+.discount-banner {
+  background-color: #d86868;
+  color: var(--text-light);
+  text-align: center;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 100;
+}
+
+.discount-banner a {
+  color: var(--text-light);
+  text-decoration: underline;
+  margin-left: 10px;
+}
+
+.discount-banner a:hover {
+  color: #daffb9;
+}
 
 .products {
-  padding: 40px 15%;
+  padding: 40px 5%;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(6, minmax(180px, 1fr));
+  gap: 20px;
 }
 
 .product-card {
@@ -140,7 +158,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 250px;
+  max-width: 200px;
 }
 
 .product-card:hover {
@@ -154,7 +172,7 @@ body {
 
 .product-card img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -163,6 +181,7 @@ body {
 .price__span {
   margin: 10px 0;
   font-weight: 600;
+  font-size: 1rem;
 }
 
 .main__btn {
@@ -221,23 +240,11 @@ footer {
 
 @media (max-width: 1024px) {
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  }
-  .products {
-  padding: 40px 5%;
-}
-  
-  .header__list {
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 }
+
 @media (max-width: 900px) {
-
-  .products {
-  padding: 40px 5%;
-}
-
-  
   .header__list {
     gap: 15px;
   }
@@ -248,9 +255,6 @@ footer {
     flex-wrap: wrap;
     padding: 10px 5%;
   }
-    .products {
-  padding: 40px 5%;
-}
   
   .burger-menu {
     display: flex;
@@ -284,42 +288,40 @@ footer {
   }
   
   .product-card img {
-    height: 160px;
+    height: 140px;
+  }
+  
+  .discount-banner {
+    padding: 10px 15px;
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
+  .header {
+    padding: 15px;
+  }
+  
   .logo {
     gap: 10px;
+  }
   
-  }
-
-  .header {
-    padding: 20px;
-  }
-
-
   .logo__span {
     display: block;
-   color: black;
-   font-size: 12px;
+    color: black;
+    font-size: 14px;
   }
-
+  
   .logo__block {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-     text-decoration: none;
+    text-decoration: none;
   }
-
-  
-    .products {
-  padding: 40px 5%;
-}
   
   .logo__img {
-  display: none;
+    display: none;
   }
   
   .top-controls {
@@ -327,20 +329,267 @@ footer {
   }
   
   .product-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: repeat(4, minmax(80px, 1fr));
+    gap: 12px;
   }
   
   .product-card {
-    padding: 10px;
+    padding: 5px;
+    max-width: 120px;
+    overflow: hidden;
   }
   
   .product-card img {
-    height: 120px;
+    height: 80px;
+    margin-bottom: 8px;
+  }
+  
+  .product-card p {
+    font-size: 10px;
+    line-height: 1.3;
+    text-align: center;
+   
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .price__span {
+    font-size: 10px;
+    margin: 7px 0;
+    text-align: center;
   }
   
   .main__btn {
-    padding: 6px 10px;
-    font-size: 0.8rem;
+    padding: 4px 6px;
+    font-size: 11px;
   }
+  
+  .discount-banner {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+}
+/* Стили для селектора города */
+.city-selector {
+  background-color: white;
+  padding: 10px 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  max-width: 800px;
+  position: relative;
+}
+
+.city-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  transition: var(--transition);
+}
+
+.city-icon:hover {
+  background-color: var(--secondary-color);
+}
+
+.city-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 150px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.city-dropdown.open {
+  display: block;
+}
+
+.city-option {
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  border-bottom: 1px solid #eee;
+}
+
+.city-option:hover {
+  background-color: var(--secondary-color);
+}
+
+.city-option.active {
+  background-color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.city-option.disabled {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.city-option.disabled:hover {
+  background-color: transparent;
+}
+
+/* Попап выбора города */
+.city-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.city-popup-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 300px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.city-popup-content h3 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.city-popup-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.popup-btn {
+  padding: 12px 16px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.popup-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+}
+
+/* Адаптивность селектора города и попапа */
+@media (max-width: 768px) {
+  .city-selector {
+    padding: 8px 15px;
+  }
+  
+  .city-icon {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+  
+  .city-dropdown {
+    min-width: 140px;
+  }
+  
+  .city-option {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .city-popup-content {
+    padding: 25px 20px;
+    max-width: 280px;
+  }
+  
+  .city-popup-content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .popup-btn {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .city-selector {
+    padding: 6px 10px;
+  }
+  
+  .city-icon {
+    font-size: 0.85rem;
+    padding: 5px 8px;
+  }
+  
+  .city-dropdown {
+    min-width: 130px;
+    left: 0;
+    right: 0;
+    transform: none;
+  }
+  
+  .city-option {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+  
+  .city-popup-content {
+    padding: 20px 15px;
+    width: 95%;
+    max-width: 260px;
+  }
+  
+  .city-popup-content h3 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  .city-popup-buttons {
+    gap: 8px;
+  }
+  
+  .popup-btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Закрываемый баннер (опционально) */
+.discount-banner {
+  position: relative;
+}
+
+.discount-banner .close-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+
+.discount-banner .close-btn:hover {
+  color: #daffb9;
 }

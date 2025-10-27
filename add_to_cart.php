@@ -1,32 +1,47 @@
 <?php
-session_start();
 require_once 'db.php';
+session_start();
 
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
+header('Content-Type: application/json');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $productId = (int)$_POST['product_id'];
+$response = ['success' => false, 'error' => ''];
 
-   
+try {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Неверный метод запроса');
+    }
+
+    $product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
+    $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
+
+    if ($product_id <= 0 || $quantity <= 0) {
+        throw new Exception('Некорректный ID продукта или количество');
+    }
+
+    // Проверяем, существует ли продукт
     $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
-    $stmt->execute([$productId]);
+    $stmt->execute([$product_id]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$product || !isset($product['price'])) {
-        die("Ошибка: товар не найден или у него нет цены.");
+        throw new Exception('Товар не найден или у него нет цены');
+    }
+
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
     }
 
     $found = false;
     foreach ($_SESSION['cart'] as &$item) {
-        if ($item['id'] == $productId) {
-            $item['quantity'] += 1;
+        if ($item['id'] === $product['id']) {
+            $item['quantity'] += $quantity;
             $found = true;
             break;
         }
     }
     unset($item);
+
 
     if (!$found) {
         $_SESSION['cart'][] = [
@@ -34,10 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'name' => $product['name'],
             'price' => $product['price'],
             'image' => $product['image'],
-            'quantity' => 1
+            'quantity' => $quantity
         ];
     }
+
+    $response['success'] = true;
+    error_log("Товар ID $product_id добавлен в корзину, количество: $quantity"); 
+} catch (Exception $e) {
+    $response['error'] = $e->getMessage();
+    error_log("Ошибка в add_to_cart.php: " . $e->getMessage()); 
 }
 
-header('Location: checkout.php');
+echo json_encode($response);
 exit;
+?>

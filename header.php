@@ -52,7 +52,7 @@ if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
             <img class="logo__img" src="./img/logo2.png" alt="Логотип" loading="lazy">
         </a> 
         <a class="logo__block" href="main.php" title="На главную">
-            <img src="./img/home.png" alt="Домой" style="width: 24px; height: 24px;">
+            <img src="./img/home.png" alt="Домой" style="width: 24px; height: 24px; color: white;">
             <span class="logo__span">На главную</span>
         </a>
     </div>

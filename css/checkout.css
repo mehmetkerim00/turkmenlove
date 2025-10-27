@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #d44f68;
-  --secondary-color: #ffb9b9;
+  --primary-color: #0d6b28;
+  --secondary-color: #daffb9;
   --accent-color: #76172a;
   --text-color: #333;
   --text-light: #fff;
@@ -52,6 +52,15 @@ main {
   min-width: 280px;
 }
 
+.form-group,
+.double__input,
+#address-fields {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 1); /* Один и тот же промежуток между полями */
+  margin-bottom: calc(var(--spacing-unit) * 1.5); /* Отступ снизу для групп */
+}
+
 input,
 textarea,
 .select__time {
@@ -60,20 +69,25 @@ textarea,
   border: 1px solid var(--primary-color);
   border-radius: var(--border-radius);
   font-size: var(--font-size-base);
-  margin-bottom: calc(var(--spacing-unit) * 1.5);
+  margin-bottom: 0; /* Убрали индивидуальные отступы */
   transition: var(--transition);
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-.double__input {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--spacing-unit) * 1);
-  margin-bottom: calc(var(--spacing-unit) * 1.5);
+.receiver_name_input,
+.special__input {
+  margin-bottom: 0; /* Убрали неконсистентные отступы */
 }
 
-.special__input {
-  margin-bottom: calc(var(--spacing-unit) * 1.5);
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  margin-bottom: 0;
+}
+
+.form-group h3,
+.double__input h3 {
+  margin: calc(var(--spacing-unit) * 0.625); /* Заменили margin: 10px */
 }
 
 input:hover,
@@ -89,11 +103,6 @@ textarea:focus,
   border-color: var(--primary-color);
   background-color: var(--text-light);
   box-shadow: 0 0 0 2px rgba(212, 79, 104, 0.2);
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
 }
 
 .product-box {
@@ -182,7 +191,7 @@ textarea {
   cursor: pointer;
   transition: var(--transition);
   margin: calc(var(--spacing-unit) * 2) 0;
-  touch-action: manipulation; /* Для сенсорных устройств */
+  touch-action: manipulation;
 }
 
 .button:hover {
@@ -270,22 +279,97 @@ input.error {
   margin-top: calc(var(--spacing-unit) * -0.5);
   margin-bottom: var(--spacing-unit);
 }
-
-/* Медиа-запросы для адаптивности */
-
-/* Десктопы (≥1200px) */
-@media (min-width: 1200px) {
-  .main__block {
-    gap: calc(var(--spacing-unit) * 2);
-  }
-
-  .product-image {
-    max-width: 150px;
-    max-height: 150px;
-  }
+.input-group input.error,
+.input-group select.error,
+.input-group textarea.error {
+  border-color: #ff4444;
+  box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.2);
 }
 
-/* Планшеты и маленькие десктопы (900px–1199px) */
+.input-number {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.error-text {
+  color: red;
+  font-size: 10px;
+}
+
+.no-address-msg {
+    display: none; 
+    color: #555;
+    font-size: 14px;
+    margin-top: 5px;
+}
+#address-fields {
+    transition: opacity 0.3s ease; 
+}
+#address-fields[style*="display: none"] {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+#address-fields[style*="display: block"] {
+    opacity: 1;
+    height: auto;
+}
+
+.checkbox-group {
+    display: flex;
+
+    gap: 10px; 
+    margin-bottom: 15px; 
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center; 
+    gap: 8px; 
+    cursor: pointer; 
+}
+
+.no-address-msg {
+    display: none; 
+    font-weight: bold;
+    color: green; 
+    font-size: 14px; 
+    margin: 0; 
+    transition: opacity 0.3s ease; 
+}
+
+.no-address-msg[style*="display: block"] {
+    display: inline-block; 
+    opacity: 1; 
+}
+
+.no-address-msg[style*="display: none"] {
+    opacity: 0;
+}
+
+#address-fields {
+    transition: opacity 0.3s ease, height 0.3s ease; 
+}
+
+#address-fields[style*="display: none"] {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+#address-fields[style*="display: block"] {
+    opacity: 1;
+    height: auto;
+}
+
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px; 
+    height: 18px;
+    margin: 0; 
+}
+
 @media (max-width: 1199px) {
   .main__block {
     flex-direction: column;
@@ -311,7 +395,6 @@ input.error {
   }
 }
 
-/* Планшеты и большие телефоны (600px–899px) */
 @media (max-width: 899px) {
   main {
     padding: var(--spacing-unit);
@@ -326,8 +409,11 @@ input.error {
     min-width: 100%;
   }
 
-  .double__input {
+  .form-group,
+  .double__input,
+  #address-fields {
     gap: calc(var(--spacing-unit) * 0.8);
+    margin-bottom: calc(var(--spacing-unit) * 1.2);
   }
 
   .product-box {
@@ -352,7 +438,6 @@ input.error {
   }
 }
 
-/* Телефоны (≤599px) */
 @media (max-width: 599px) {
   :root {
     --font-size-base: 14px;
@@ -362,6 +447,13 @@ input.error {
   main {
     padding: calc(var(--spacing-unit) * 0.8);
   }
+  .checkbox-group {
+        flex-wrap: wrap; 
+        gap: 5px;
+    }
+    .no-address-msg {
+        font-size: 12px; 
+    }
 
   .form__class {
     padding: calc(var(--spacing-unit) * 0.8);
@@ -370,6 +462,13 @@ input.error {
 
   .main__block {
     gap: var(--spacing-unit);
+  }
+
+  .form-group,
+  .double__input,
+  #address-fields {
+    gap: calc(var(--spacing-unit) * 0.6);
+    margin-bottom: calc(var(--spacing-unit) * 1);
   }
 
   .product-box {
@@ -418,7 +517,6 @@ input.error {
   }
 }
 
-/* Очень узкие экраны (≤400px) */
 @media (max-width: 400px) {
   .recommendation-box {
     grid-template-columns: 1fr;
